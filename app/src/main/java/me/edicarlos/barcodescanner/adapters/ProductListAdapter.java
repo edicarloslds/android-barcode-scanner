@@ -1,4 +1,4 @@
-package me.edicarlos.barcodescanner;
+package me.edicarlos.barcodescanner.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,15 +9,17 @@ import android.widget.TextView;
 
 import java.util.LinkedList;
 
-public class SolicitationListAdapter extends RecyclerView.Adapter<SolicitationListAdapter.WordViewHolder> {
+import me.edicarlos.barcodescanner.R;
 
-    private final LinkedList<String> mSolicitationList;
+public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.WordViewHolder> {
+
+    private final LinkedList<String> mProductList;
     private final LayoutInflater mInflater;
 
-    class WordViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class WordViewHolder extends RecyclerView.ViewHolder{
 
-        public final TextView solicitationItemView;
-        final SolicitationListAdapter mAdapter;
+        public final TextView productItemView;
+        final ProductListAdapter mAdapter;
 
         /**
          * Creates a new custom view holder to hold the view to display in the RecyclerView.
@@ -25,24 +27,16 @@ public class SolicitationListAdapter extends RecyclerView.Adapter<SolicitationLi
          * @param itemView The view in which to display the data.
          * @param adapter The adapter that manages the the data and views for the RecyclerView.
          */
-        public WordViewHolder(View itemView, SolicitationListAdapter adapter) {
+        public WordViewHolder(View itemView, ProductListAdapter adapter) {
             super(itemView);
-            solicitationItemView = (TextView) itemView.findViewById(R.id.solicitation);
+            productItemView = (TextView) itemView.findViewById(R.id.product);
             this.mAdapter = adapter;
-            itemView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View v) {
-            // All we do here is prepend "Clicked! " to the text in the view, to verify that
-            // the correct item was clicked. The underlying data does not change.
-            solicitationItemView.setText ("Clicked! "+ solicitationItemView.getText());
         }
     }
 
-    public SolicitationListAdapter(Context context, LinkedList<String> solicitationList) {
+    public ProductListAdapter(Context context, LinkedList<String> solicitationList) {
         mInflater = LayoutInflater.from(context);
-        this.mSolicitationList = solicitationList;
+        this.mProductList = solicitationList;
     }
 
     /**
@@ -56,7 +50,7 @@ public class SolicitationListAdapter extends RecyclerView.Adapter<SolicitationLi
     @Override
     public WordViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // Inflate an item view.
-        View mItemView = mInflater.inflate(R.layout.solicitation_item, parent, false);
+        View mItemView = mInflater.inflate(R.layout.product_item, parent, false);
         return new WordViewHolder(mItemView, this);
     }
 
@@ -70,9 +64,9 @@ public class SolicitationListAdapter extends RecyclerView.Adapter<SolicitationLi
     @Override
     public void onBindViewHolder(WordViewHolder holder, int position) {
         // Retrieve the data for that position.
-        String mCurrent = mSolicitationList.get(position);
+        String mCurrent = mProductList.get(position);
         // Add the data to the view holder.
-        holder.solicitationItemView.setText(mCurrent);
+        holder.productItemView.setText(mCurrent);
     }
 
     /**
@@ -82,6 +76,6 @@ public class SolicitationListAdapter extends RecyclerView.Adapter<SolicitationLi
      */
     @Override
     public int getItemCount() {
-        return mSolicitationList.size();
+        return mProductList.size();
     }
 }
